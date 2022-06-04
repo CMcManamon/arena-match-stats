@@ -1,8 +1,8 @@
 import pandas as pd
 # File
-csvFileName = 'arena20220314.csv'
+csvFileName = 'sample.csv'
 # Filters
-players = ('Fadeleafz', 'Kaooz')
+players = ('Toby', 'Kraven')
 teamSize = len(players)
 
 data = pd.read_csv(csvFileName, index_col=False)
@@ -61,9 +61,13 @@ for ind in filteredData.index:
 totalWin = 0
 totalLoss = 0
 
-for key, value in sorted(teamComps.items(),
-                         key=lambda item: item[1][2],
-                         reverse=True):
+print("Team:", end=" ")
+for player in players:
+    print(player, end=" ")
+print("\n{:<10} {:<10} {:<6} {:<6} {:<6}".format("Class 1", "Class 2", "Win", "Loss", "%"))
+for key, value in sorted(sorted(teamComps.items(),
+                         key=lambda item: item[1][0],
+                         reverse=True), key=lambda it: it[1][2], reverse=True):
     tComp = list(key)
     print("{:<10} {:<10} {:<6} {:<6} {:<6}".format(tComp[0], tComp[1], value[0], value[1], value[2]))
     totalWin += value[0]
